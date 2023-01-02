@@ -132,13 +132,13 @@ ENV OMRS_CONFIG_CONNECTION_DATABASE="openmrs"
 # Additional environment variables as needed. This should match the name of the distribution supplied OpenMRS war file
 ENV OMRS_WEBAPP_NAME="openmrs"
 
-RUN sed -i '/Connector port="8080"/a URIEncoding="UTF-8" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"' /usr/local/tomcat/conf/server.xml
+RUN sed -i '/Connector port="8081"/a URIEncoding="UTF-8" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"' /usr/local/tomcat/conf/server.xml
 
 COPY --from=dev /app/LICENSE LICENSE
 # Copy the app
 COPY --from=dev /app/webapp/target/openmrs.war /openmrs/distribution/openmrs_core/openmrs.war
 
-EXPOSE 8080
+EXPOSE 8081
 
 CMD ["dumb-init", "/usr/local/tomcat/startup.sh"]
 
